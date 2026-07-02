@@ -1,0 +1,49 @@
+{
+  "eval_set_id": "momo_ledger_eval",
+  "name": "MoMo Ledger Evaluation",
+  "description": "Evaluation set verifying the statement parsing, categorization, and credit profiling workflow.",
+  "eval_cases": [
+    {
+      "eval_id": "successful_statement_analysis",
+      "conversation": [
+        {
+          "invocation_id": "inv_1",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Analyze this MoMo statement: Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001. You have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002."
+              }
+            ]
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "parse_momo_statement",
+                "args": {
+                  "statement_text": "Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001. You have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002."
+                }
+              },
+              {
+                "name": "categorize_momo_transactions",
+                "args": {}
+              },
+              {
+                "name": "assess_credit_readiness",
+                "args": {}
+              },
+              {
+                "name": "generate_ledger_report",
+                "args": {}
+              }
+            ]
+          }
+        }
+      ],
+      "session_input": {
+        "app_name": "app",
+        "user_id": "eval_user",
+        "state": {}
+      }
+    }
+  ]
+}

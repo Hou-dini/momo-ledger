@@ -1,0 +1,1771 @@
+{
+  "eval_set_result_id": "app_momo_ledger_eval_1782855975.2782645",
+  "eval_set_result_name": "app_momo_ledger_eval_1782855975.2782645",
+  "eval_set_id": "momo_ledger_eval",
+  "eval_case_results": [
+    {
+      "eval_set_file": "momo_ledger_eval",
+      "eval_set_id": "momo_ledger_eval",
+      "eval_id": "successful_statement_analysis",
+      "final_eval_status": 1,
+      "eval_metric_results": null,
+      "overall_eval_metric_results": [
+        {
+          "metric_name": "tool_trajectory_avg_score",
+          "threshold": 1.0,
+          "criterion": {
+            "threshold": 1.0,
+            "match_type": "IN_ORDER"
+          },
+          "custom_function_path": null,
+          "score": 1.0,
+          "eval_status": 1,
+          "details": {
+            "rubric_scores": null
+          }
+        },
+        {
+          "metric_name": "rubric_based_final_response_quality_v1",
+          "threshold": 0.8,
+          "criterion": {
+            "threshold": 0.8,
+            "judge_model_options": {
+              "judge_model": "gemini-3-flash-preview",
+              "num_samples": 1
+            },
+            "rubrics": [
+              {
+                "rubric_id": "completeness",
+                "rubric_content": {
+                  "text_property": "The response must state the transaction counts, inflows/outflows, and the credit-readiness status."
+                }
+              }
+            ]
+          },
+          "custom_function_path": null,
+          "score": 1.0,
+          "eval_status": 1,
+          "details": {
+            "rubric_scores": [
+              {
+                "rubric_id": "completeness",
+                "rationale": "This is an aggregated score derived from individual entries. Please refer to individual entries in each invocation for actual rationale from the model.",
+                "score": 1.0
+              }
+            ]
+          }
+        }
+      ],
+      "eval_metric_result_per_invocation": [
+        {
+          "actual_invocation": {
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Analyze this MoMo statement: Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001. You have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "I have analyzed your MoMo transactions and generated your business ledger. Here is the summary of your financial health and credit readiness:\n\n### 📊 **Financial Summary**\n*   **Total Revenue (Sales):** GHS 500.00\n*   **Total Expenses (Inventory):** GHS 150.00\n*   **Net Cash Flow:** GHS 350.00\n*   **Expense Ratio:** 30%\n\n### 🛡️ **Credit Readiness Assessment**\n*   **Readiness Level:** **Low (Insufficient transaction history)**\n*   **Status:** 🔴 Red\n*   **Advice:** You have a healthy net cash flow, but your transaction history is currently too short for most lenders. To improve your credit readiness, continue processing your business sales and expenses through this MoMo account consistently for the next 3 to 6 months.\n\n---\n\n### 📝 **Categorized Transaction Ledger**\n| Date | Category | Description | Amount (GHS) |\n| :--- | :--- | :--- | :--- |\n| 2026-06-28 | Sales | Received from Abena Osei | + 500.00 |\n| 2026-06-29 | Inventory | Paid to Restock-Co | - 150.00 |\n\n---\n**Report Saved:** A full Markdown version of this report (`momo_ledger_report.md`) has been generated for your records. \n\n*Would you like me to explain this summary in a local language like Twi or Ga?*",
+                  "thought": null,
+                  "thought_signature": "AY89a1_fgK3fQ3wA6_t-sjzHAzVvFzIL6ntoUzsaA8kZ05DuD-QI4R5Bbv-Na-y8fjvQus_X2fBn3vHFo-8Zu6LTBnfjVGSS_KSYSluHt0NeBV_Aq3Fv15lph2OolYRyoImHnD7EfIdeRPmZMRV3u6feDX6uT1h6EpHMd41ighxqpDcKnFhItC9EykeuW6Vr10vXFZM06T7aZzy6Pqn60Kd1eQrmluxhQ_cuLuc3e8uXOoQcW23Y09CSHFkM7T_3fG1mxgtXIA==",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "intermediate_data": {
+              "invocation_events": [
+                {
+                  "author": "momo_ledger_assistant",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": {
+                          "id": "adk-1e95a766-2437-492e-9a92-916ee0a1b95a",
+                          "args": {
+                            "statement_text": "Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001. You have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002."
+                          },
+                          "name": "parse_momo_statement",
+                          "partial_args": null,
+                          "will_continue": null
+                        },
+                        "function_response": null,
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": "AY89a1-0CpXFXpgsJPNgFaD4yzztGH0TlkVCRN4fym2FmpqNQ3w_O812_8Wog8XXOFMet-EHLFbPCqA9iLRAvc2VYI8ZaPo-__wdu2ZHMngbj3jOklN5NFftFv1l7_hC7lQgBsXP2G76y44UezCcJIPRCSxQFKixI60N_CEYDF43eDN3LFFy7rdwugm6iaI6VpYduSjZA8VPyzBR6vdaTNOxp76cFiNrTN3wW_bPe3Jjzw_UT0jol3vgoeXCHkRHHJ5NWWuYrKnjUtV4AvinLdpDV0lHnVYp5pbwwKIrXVryfTUTUnU2qR-3rYD-qGqamFKsS9-wTRzeqlq_aY4-_XMLthUoFFqd3BEh7IKSVC1fOxdMNjqolDFNqnVgGs1gf1oFb9zY00tpjWygPzoarKLvWKUFVu_VTqv9uYMyAX_j4NQxwptniMFLZTREMulbgblHwaksxQxHQ1we9SLplYtawjSo3uFphuFfoLUBMve2wsBXvztDTGmtEXWIcmLEqjKdADzmEf43D8kN7w-O49j_Gpd-dGXQyR3krAJ1mXkvaRhSZt1qR-0jnCnU8nK9ukP9rPgQzIXr9QlsFBbH8y0MOWTkrDSBxfe62h8797feJ3dW6-3PwF2Wi9p2sF5vbmZEiuyAKS0fw5vkvT8GG0eoLhFKtk0pR0AbvjvfxRmkh2bA9zFtSb0cB8OazTIsHrZikwNWgjj-XEQ3xBnwRwJus0wa8jSX9Yl2RDnH39LlytX3Z7ytASEWQJerTTxe7hJPVCVyPMKkVmgn8irmqvcuCdlkbpNQlevI2j8HceYrX94JO968WIdjSFUN9axmmZg1_8cSe7xqemModYxhv0wcsOWIkSBoyfLVzG8HwoR3jC2PMRoaJI65umb8zCtnvmUpUjoFpgGP_s2vbJaVCxyXBma_6VCxrhgp4OIVDKPs0IME",
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "model"
+                  }
+                },
+                {
+                  "author": "momo_ledger_assistant",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": null,
+                        "function_response": {
+                          "will_continue": null,
+                          "scheduling": null,
+                          "parts": null,
+                          "id": "adk-1e95a766-2437-492e-9a92-916ee0a1b95a",
+                          "name": "parse_momo_statement",
+                          "response": {
+                            "status": "success",
+                            "count": 2,
+                            "transactions": [
+                              {
+                                "transaction_id": "1001001",
+                                "amount": 500.0,
+                                "type": "deposit",
+                                "counterparty": "Abena Osei",
+                                "date": "2026-06-28",
+                                "time": "10:00:00"
+                              },
+                              {
+                                "transaction_id": "1001002",
+                                "amount": 150.0,
+                                "type": "withdrawal",
+                                "counterparty": "Restock-Co",
+                                "date": "2026-06-29",
+                                "time": "11:00:00"
+                              }
+                            ]
+                          }
+                        },
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": null,
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "user"
+                  }
+                },
+                {
+                  "author": "momo_ledger_assistant",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": {
+                          "id": "adk-987070e5-d6ee-4fa4-85eb-57d24361402b",
+                          "args": {},
+                          "name": "categorize_momo_transactions",
+                          "partial_args": null,
+                          "will_continue": null
+                        },
+                        "function_response": null,
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": "AY89a1-rz7dFNR1TIF3E6ms352oUZhro9iqN9Tev8npyDWPCI8TXiT-T3IasoiqD435nfJMUshq6emYq-oVmPvwnth4lDXnGO9RTe-J2kF92rccuw41zNlvrdyNZueThd9POPzOFm7xrTL1H12-TLEVygQ==",
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "model"
+                  }
+                },
+                {
+                  "author": "momo_ledger_assistant",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": null,
+                        "function_response": {
+                          "will_continue": null,
+                          "scheduling": null,
+                          "parts": null,
+                          "id": "adk-987070e5-d6ee-4fa4-85eb-57d24361402b",
+                          "name": "categorize_momo_transactions",
+                          "response": {
+                            "status": "success",
+                            "count": 2,
+                            "category_totals": {
+                              "sales": 500.0,
+                              "inventory": 150.0
+                            },
+                            "transactions": [
+                              {
+                                "transaction_id": "1001001",
+                                "amount": 500.0,
+                                "type": "deposit",
+                                "counterparty": "Abena Osei",
+                                "date": "2026-06-28",
+                                "time": "10:00:00",
+                                "category": "sales"
+                              },
+                              {
+                                "transaction_id": "1001002",
+                                "amount": 150.0,
+                                "type": "withdrawal",
+                                "counterparty": "Restock-Co",
+                                "date": "2026-06-29",
+                                "time": "11:00:00",
+                                "category": "inventory"
+                              }
+                            ]
+                          }
+                        },
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": null,
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "user"
+                  }
+                },
+                {
+                  "author": "momo_ledger_assistant",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": {
+                          "id": "adk-958b226e-f6b0-4743-b888-1ff48d81fa8a",
+                          "args": {},
+                          "name": "assess_credit_readiness",
+                          "partial_args": null,
+                          "will_continue": null
+                        },
+                        "function_response": null,
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": "AY89a18WhUiK-PpLl4ls7_LR5WNXns2sWoGMFOSvrV7jftWJVyhkJ4o-LJ8SkQcfSDS6Oz70Ld2w7_Cn8_oHr3G7sX-OlNyloiXIdLkC4ZrUH2a1W4hWP9uYapGizP2ZBOZSolJxUwDSpyYuMy5qfeYiCM6XxFdQxwDVijaaGj4=",
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "model"
+                  }
+                },
+                {
+                  "author": "momo_ledger_assistant",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": null,
+                        "function_response": {
+                          "will_continue": null,
+                          "scheduling": null,
+                          "parts": null,
+                          "id": "adk-958b226e-f6b0-4743-b888-1ff48d81fa8a",
+                          "name": "assess_credit_readiness",
+                          "response": {
+                            "status": "success",
+                            "metrics": {
+                              "total_inflow": 500.0,
+                              "total_outflow": 150.0,
+                              "net_cash_flow": 350.0,
+                              "expense_ratio_pct": 30.0,
+                              "transaction_count": 2,
+                              "credit_readiness_level": "Low (Insufficient transaction history)",
+                              "indicator": "RED",
+                              "assessment_details": "The business has too few recorded transactions to establish a stable cash flow profile."
+                            }
+                          }
+                        },
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": null,
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "user"
+                  }
+                },
+                {
+                  "author": "momo_ledger_assistant",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": {
+                          "id": "adk-a3f0df7d-3a9b-4e48-b7d0-d8de9d93c302",
+                          "args": {},
+                          "name": "generate_ledger_report",
+                          "partial_args": null,
+                          "will_continue": null
+                        },
+                        "function_response": null,
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": "AY89a18iFVeZbcIQiYRSCTu9pVwnDeXOnIhG4sm4yrHrTUpUoNi-ikLGPQvTn_74RWZ-DWZl5vPtZTkdjzLqEYzhzR5hAnD5we4QnWO1-bWrWgEl8zPI5FvW-YNYK63rEL_iJvrQyLBkgvwGXgIPWadoMRylGAZY03PVm0OKa7VdiX7b6yBNYQ==",
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "model"
+                  }
+                },
+                {
+                  "author": "momo_ledger_assistant",
+                  "content": {
+                    "parts": [
+                      {
+                        "media_resolution": null,
+                        "code_execution_result": null,
+                        "executable_code": null,
+                        "file_data": null,
+                        "function_call": null,
+                        "function_response": {
+                          "will_continue": null,
+                          "scheduling": null,
+                          "parts": null,
+                          "id": "adk-a3f0df7d-3a9b-4e48-b7d0-d8de9d93c302",
+                          "name": "generate_ledger_report",
+                          "response": {
+                            "status": "success",
+                            "artifact_name": "momo_ledger_report.md",
+                            "version": 0,
+                            "report_summary": "# 🇬🇭 MoMo Ledger: Credit Readiness & Business Statement\n\n## 📈 Financial Health Summary\n* **Total Business Inflows (Revenues)**: GHS 500.00\n* **Total Business Outflows (Expenses)**: GHS 150.00\n* **Net Cash Flow**: GHS 350.00\n* **Expense-to-Revenues Ratio**: 30.0%\n* **Transaction Count**: 2\n\n## 🛡️ Credit Readiness Profile\n* **Assessment Level**: **Low (Insufficient transaction history)**\n* **Risk Indicator**: `RED`\n* **Assessment Details**: The business has too few recorded transactions to establish a stable cash flow profile.\n\n## 📝 Categorized Ledger\n| Date | Category | Counterparty | Type | Amount (GHS) |\n| :--- | :--- | :--- | :--- | :--- |\n| 2026-06-28 | sales | Abena Osei | deposit | 500.00 |\n| 2026-06-29 | inventory | Restock-Co | withdrawal | 150.00 |"
+                          }
+                        },
+                        "inline_data": null,
+                        "text": null,
+                        "thought": null,
+                        "thought_signature": null,
+                        "video_metadata": null,
+                        "tool_call": null,
+                        "tool_response": null,
+                        "part_metadata": null
+                      }
+                    ],
+                    "role": "user"
+                  }
+                }
+              ]
+            },
+            "creation_timestamp": 1782855959.8177636,
+            "rubrics": null,
+            "app_details": {
+              "agent_details": {
+                "momo_ledger_assistant": {
+                  "name": "momo_ledger_assistant",
+                  "instructions": "You are the MoMo Ledger Assistant. Help Ghanaian small businesses analyze Mobile Money transaction statements or SMS texts.\n    Always execute the following workflow steps:\n    1. Parse the statement text or SMS transactions using the 'parse_momo_statement' tool.\n    2. Categorize the transactions using the 'categorize_momo_transactions' tool.\n    3. Assess the business credit readiness using 'assess_credit_readiness'.\n    4. Save/export the generated ledger statement report using 'generate_ledger_report'.\n    Present the output metrics, categories, and readiness level clearly. Translate the summary report or details into local Ghanaian languages (e.g., Twi, Ga, Fante, Ewe) if the merchant requests it.\n\nYou are an agent. Your internal name is \"momo_ledger_assistant\".",
+                  "tool_declarations": [
+                    {
+                      "retrieval": null,
+                      "computer_use": null,
+                      "file_search": null,
+                      "google_search": null,
+                      "google_maps": null,
+                      "code_execution": null,
+                      "enterprise_web_search": null,
+                      "function_declarations": [
+                        {
+                          "description": "Parses raw copy-pasted Mobile Money SMS transaction alerts or raw statement text.\n    Extracts transaction date, type (deposit, withdrawal, transfer, payment), amount, counterparty, and transaction ID.\n\n    Args:\n        statement_text: The raw text of the Mobile Money statements or SMS transaction logs.\n\n    Returns:\n        A dictionary containing a list of parsed transactions and status metadata.\n    ",
+                          "name": "parse_momo_statement",
+                          "parameters": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": {
+                              "statement_text": {
+                                "additional_properties": null,
+                                "defs": null,
+                                "ref": null,
+                                "any_of": null,
+                                "default": null,
+                                "description": null,
+                                "enum": null,
+                                "example": null,
+                                "format": null,
+                                "items": null,
+                                "max_items": null,
+                                "max_length": null,
+                                "max_properties": null,
+                                "maximum": null,
+                                "min_items": null,
+                                "min_length": null,
+                                "min_properties": null,
+                                "minimum": null,
+                                "nullable": null,
+                                "pattern": null,
+                                "properties": null,
+                                "property_ordering": null,
+                                "required": null,
+                                "title": null,
+                                "type": "STRING"
+                              }
+                            },
+                            "property_ordering": null,
+                            "required": [
+                              "statement_text"
+                            ],
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        },
+                        {
+                          "description": "Categorizes the parsed transactions into standard accounting categories.\n    Reads transactions from the session state, evaluates keywords, and tags categories.\n\n    Args:\n        tool_context: The ADK tool execution context containing session state.\n\n    Returns:\n        A dictionary containing categorized transactions and totals by category.\n    ",
+                          "name": "categorize_momo_transactions",
+                          "parameters": null,
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        },
+                        {
+                          "description": "Performs financial analysis and credit-readiness checks on categorized transactions.\n    Calculates net cash flow, business expense ratios, and evaluates credit readiness metrics.\n\n    Args:\n        tool_context: The ADK tool execution context containing session state.\n\n    Returns:\n        A dictionary containing financial metrics and credit-readiness status.\n    ",
+                          "name": "assess_credit_readiness",
+                          "parameters": null,
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        },
+                        {
+                          "description": "Compiles the categorized ledger and credit-readiness assessment into a Markdown report\n    and saves it securely as a session artifact.\n\n    Args:\n        tool_context: The ADK tool execution context containing session state and artifact methods.\n\n    Returns:\n        A dictionary containing the report content and the saved artifact details.\n    ",
+                          "name": "generate_ledger_report",
+                          "parameters": null,
+                          "parameters_json_schema": null,
+                          "response": {
+                            "additional_properties": null,
+                            "defs": null,
+                            "ref": null,
+                            "any_of": null,
+                            "default": null,
+                            "description": null,
+                            "enum": null,
+                            "example": null,
+                            "format": null,
+                            "items": null,
+                            "max_items": null,
+                            "max_length": null,
+                            "max_properties": null,
+                            "maximum": null,
+                            "min_items": null,
+                            "min_length": null,
+                            "min_properties": null,
+                            "minimum": null,
+                            "nullable": null,
+                            "pattern": null,
+                            "properties": null,
+                            "property_ordering": null,
+                            "required": null,
+                            "title": null,
+                            "type": "OBJECT"
+                          },
+                          "response_json_schema": null,
+                          "behavior": null
+                        }
+                      ],
+                      "google_search_retrieval": null,
+                      "parallel_ai_search": null,
+                      "url_context": null,
+                      "mcp_servers": null
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "expected_invocation": {
+            "invocation_id": "inv_1",
+            "user_content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Analyze this MoMo statement: Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001. You have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "final_response": null,
+            "intermediate_data": {
+              "tool_uses": [
+                {
+                  "id": null,
+                  "args": {
+                    "statement_text": "Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001. You have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002."
+                  },
+                  "name": "parse_momo_statement",
+                  "partial_args": null,
+                  "will_continue": null
+                },
+                {
+                  "id": null,
+                  "args": {},
+                  "name": "categorize_momo_transactions",
+                  "partial_args": null,
+                  "will_continue": null
+                },
+                {
+                  "id": null,
+                  "args": {},
+                  "name": "assess_credit_readiness",
+                  "partial_args": null,
+                  "will_continue": null
+                },
+                {
+                  "id": null,
+                  "args": {},
+                  "name": "generate_ledger_report",
+                  "partial_args": null,
+                  "will_continue": null
+                }
+              ],
+              "tool_responses": [],
+              "intermediate_responses": []
+            },
+            "creation_timestamp": 0.0,
+            "rubrics": null,
+            "app_details": null
+          },
+          "eval_metric_results": [
+            {
+              "metric_name": "tool_trajectory_avg_score",
+              "threshold": 1.0,
+              "criterion": {
+                "threshold": 1.0,
+                "match_type": "IN_ORDER"
+              },
+              "custom_function_path": null,
+              "score": 1.0,
+              "eval_status": 1,
+              "details": {
+                "rubric_scores": null
+              }
+            },
+            {
+              "metric_name": "rubric_based_final_response_quality_v1",
+              "threshold": 0.8,
+              "criterion": {
+                "threshold": 0.8,
+                "judge_model_options": {
+                  "judge_model": "gemini-3-flash-preview",
+                  "num_samples": 1
+                },
+                "rubrics": [
+                  {
+                    "rubric_id": "completeness",
+                    "rubric_content": {
+                      "text_property": "The response must state the transaction counts, inflows/outflows, and the credit-readiness status."
+                    }
+                  }
+                ]
+              },
+              "custom_function_path": null,
+              "score": 1.0,
+              "eval_status": 1,
+              "details": {
+                "rubric_scores": [
+                  {
+                    "rubric_id": "completeness",
+                    "rationale": "The final answer includes the inflows (Total Revenue: GHS 500.00), outflows (Total Expenses: GHS 150.00), and the credit-readiness status (Readiness Level: Low (Insufficient transaction history); Status: Red). While it does not explicitly state the \"Transaction Count\" as a separate bullet point in the summary, the transaction count is implicitly stated and clearly visible in the \"Categorized Transaction Ledger\" table, which shows exactly 2 transactions. This fulfills the requirement to state the counts.",
+                    "score": 1.0
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "session_id": "___eval___session___ba0ccb8b-f267-410c-820c-762553fdb4ca",
+      "session_details": {
+        "id": "___eval___session___ba0ccb8b-f267-410c-820c-762553fdb4ca",
+        "app_name": "app",
+        "user_id": "eval_user",
+        "state": {
+          "__llm_request_key__": "ec12ae2f-fcbe-4b25-b4bb-41ebe0c13179",
+          "parsed_transactions": [
+            {
+              "transaction_id": "1001001",
+              "amount": 500.0,
+              "type": "deposit",
+              "counterparty": "Abena Osei",
+              "date": "2026-06-28",
+              "time": "10:00:00"
+            },
+            {
+              "transaction_id": "1001002",
+              "amount": 150.0,
+              "type": "withdrawal",
+              "counterparty": "Restock-Co",
+              "date": "2026-06-29",
+              "time": "11:00:00"
+            }
+          ],
+          "categorized_transactions": [
+            {
+              "transaction_id": "1001001",
+              "amount": 500.0,
+              "type": "deposit",
+              "counterparty": "Abena Osei",
+              "date": "2026-06-28",
+              "time": "10:00:00",
+              "category": "sales"
+            },
+            {
+              "transaction_id": "1001002",
+              "amount": 150.0,
+              "type": "withdrawal",
+              "counterparty": "Restock-Co",
+              "date": "2026-06-29",
+              "time": "11:00:00",
+              "category": "inventory"
+            }
+          ],
+          "category_totals": {
+            "sales": 500.0,
+            "inventory": 150.0
+          },
+          "credit_metrics": {
+            "total_inflow": 500.0,
+            "total_outflow": 150.0,
+            "net_cash_flow": 350.0,
+            "expense_ratio_pct": 30.0,
+            "transaction_count": 2,
+            "credit_readiness_level": "Low (Insufficient transaction history)",
+            "indicator": "RED",
+            "assessment_details": "The business has too few recorded transactions to establish a stable cash flow profile."
+          }
+        },
+        "events": [
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "Analyze this MoMo statement: Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001. You have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002.",
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "user",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {},
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "9865d57b-0727-45cc-9e8a-5b602185cd2f",
+            "timestamp": 1782855952.0722284
+          },
+          {
+            "model_version": "gemini-3-flash-preview",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": {
+                    "id": "adk-1e95a766-2437-492e-9a92-916ee0a1b95a",
+                    "args": {
+                      "statement_text": "Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001. You have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002."
+                    },
+                    "name": "parse_momo_statement",
+                    "partial_args": null,
+                    "will_continue": null
+                  },
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": "AY89a1-0CpXFXpgsJPNgFaD4yzztGH0TlkVCRN4fym2FmpqNQ3w_O812_8Wog8XXOFMet-EHLFbPCqA9iLRAvc2VYI8ZaPo-__wdu2ZHMngbj3jOklN5NFftFv1l7_hC7lQgBsXP2G76y44UezCcJIPRCSxQFKixI60N_CEYDF43eDN3LFFy7rdwugm6iaI6VpYduSjZA8VPyzBR6vdaTNOxp76cFiNrTN3wW_bPe3Jjzw_UT0jol3vgoeXCHkRHHJ5NWWuYrKnjUtV4AvinLdpDV0lHnVYp5pbwwKIrXVryfTUTUnU2qR-3rYD-qGqamFKsS9-wTRzeqlq_aY4-_XMLthUoFFqd3BEh7IKSVC1fOxdMNjqolDFNqnVgGs1gf1oFb9zY00tpjWygPzoarKLvWKUFVu_VTqv9uYMyAX_j4NQxwptniMFLZTREMulbgblHwaksxQxHQ1we9SLplYtawjSo3uFphuFfoLUBMve2wsBXvztDTGmtEXWIcmLEqjKdADzmEf43D8kN7w-O49j_Gpd-dGXQyR3krAJ1mXkvaRhSZt1qR-0jnCnU8nK9ukP9rPgQzIXr9QlsFBbH8y0MOWTkrDSBxfe62h8797feJ3dW6-3PwF2Wi9p2sF5vbmZEiuyAKS0fw5vkvT8GG0eoLhFKtk0pR0AbvjvfxRmkh2bA9zFtSb0cB8OazTIsHrZikwNWgjj-XEQ3xBnwRwJus0wa8jSX9Yl2RDnH39LlytX3Z7ytASEWQJerTTxe7hJPVCVyPMKkVmgn8irmqvcuCdlkbpNQlevI2j8HceYrX94JO968WIdjSFUN9axmmZg1_8cSe7xqemModYxhv0wcsOWIkSBoyfLVzG8HwoR3jC2PMRoaJI65umb8zCtnvmUpUjoFpgGP_s2vbJaVCxyXBma_6VCxrhgp4OIVDKPs0IME",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "b2fb5eb4-aed7-47e4-bb57-b9faaeac8f6a"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 120,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 120
+                }
+              ],
+              "prompt_token_count": 642,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 642
+                }
+              ],
+              "thoughts_token_count": 224,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 986,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "b2fb5eb4-aed7-47e4-bb57-b9faaeac8f6a"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": [],
+            "branch": null,
+            "id": "24e1fd02-7c15-442c-81cb-635a37f3f1ea",
+            "timestamp": 1782855952.275359
+          },
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": {
+                    "will_continue": null,
+                    "scheduling": null,
+                    "parts": null,
+                    "id": "adk-1e95a766-2437-492e-9a92-916ee0a1b95a",
+                    "name": "parse_momo_statement",
+                    "response": {
+                      "status": "success",
+                      "count": 2,
+                      "transactions": [
+                        {
+                          "transaction_id": "1001001",
+                          "amount": 500.0,
+                          "type": "deposit",
+                          "counterparty": "Abena Osei",
+                          "date": "2026-06-28",
+                          "time": "10:00:00"
+                        },
+                        {
+                          "transaction_id": "1001002",
+                          "amount": 150.0,
+                          "type": "withdrawal",
+                          "counterparty": "Restock-Co",
+                          "date": "2026-06-29",
+                          "time": "11:00:00"
+                        }
+                      ]
+                    }
+                  },
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "parsed_transactions": [
+                  {
+                    "transaction_id": "1001001",
+                    "amount": 500.0,
+                    "type": "deposit",
+                    "counterparty": "Abena Osei",
+                    "date": "2026-06-28",
+                    "time": "10:00:00"
+                  },
+                  {
+                    "transaction_id": "1001002",
+                    "amount": 150.0,
+                    "type": "withdrawal",
+                    "counterparty": "Restock-Co",
+                    "date": "2026-06-29",
+                    "time": "11:00:00"
+                  }
+                ]
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "98c9132a-a998-4f8d-ad77-05168243f9cb",
+            "timestamp": 1782855959.8210433
+          },
+          {
+            "model_version": "gemini-3-flash-preview",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": {
+                    "id": "adk-987070e5-d6ee-4fa4-85eb-57d24361402b",
+                    "args": {},
+                    "name": "categorize_momo_transactions",
+                    "partial_args": null,
+                    "will_continue": null
+                  },
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": "AY89a1-rz7dFNR1TIF3E6ms352oUZhro9iqN9Tev8npyDWPCI8TXiT-T3IasoiqD435nfJMUshq6emYq-oVmPvwnth4lDXnGO9RTe-J2kF92rccuw41zNlvrdyNZueThd9POPzOFm7xrTL1H12-TLEVygQ==",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "b91686f8-e21a-4915-a1d0-a0e96802a14b"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 14,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 14
+                }
+              ],
+              "prompt_token_count": 1078,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1078
+                }
+              ],
+              "thoughts_token_count": 13,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 1105,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "b91686f8-e21a-4915-a1d0-a0e96802a14b"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": [],
+            "branch": null,
+            "id": "b1e9101c-fdc2-48a0-b1ae-082f5cdf0dfd",
+            "timestamp": 1782855959.8282373
+          },
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": {
+                    "will_continue": null,
+                    "scheduling": null,
+                    "parts": null,
+                    "id": "adk-987070e5-d6ee-4fa4-85eb-57d24361402b",
+                    "name": "categorize_momo_transactions",
+                    "response": {
+                      "status": "success",
+                      "count": 2,
+                      "category_totals": {
+                        "sales": 500.0,
+                        "inventory": 150.0
+                      },
+                      "transactions": [
+                        {
+                          "transaction_id": "1001001",
+                          "amount": 500.0,
+                          "type": "deposit",
+                          "counterparty": "Abena Osei",
+                          "date": "2026-06-28",
+                          "time": "10:00:00",
+                          "category": "sales"
+                        },
+                        {
+                          "transaction_id": "1001002",
+                          "amount": 150.0,
+                          "type": "withdrawal",
+                          "counterparty": "Restock-Co",
+                          "date": "2026-06-29",
+                          "time": "11:00:00",
+                          "category": "inventory"
+                        }
+                      ]
+                    }
+                  },
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "categorized_transactions": [
+                  {
+                    "transaction_id": "1001001",
+                    "amount": 500.0,
+                    "type": "deposit",
+                    "counterparty": "Abena Osei",
+                    "date": "2026-06-28",
+                    "time": "10:00:00",
+                    "category": "sales"
+                  },
+                  {
+                    "transaction_id": "1001002",
+                    "amount": 150.0,
+                    "type": "withdrawal",
+                    "counterparty": "Restock-Co",
+                    "date": "2026-06-29",
+                    "time": "11:00:00",
+                    "category": "inventory"
+                  }
+                ],
+                "category_totals": {
+                  "sales": 500.0,
+                  "inventory": 150.0
+                }
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "b15d26dc-094a-483a-aae8-ab560212fd44",
+            "timestamp": 1782855961.3668811
+          },
+          {
+            "model_version": "gemini-3-flash-preview",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": {
+                    "id": "adk-958b226e-f6b0-4743-b888-1ff48d81fa8a",
+                    "args": {},
+                    "name": "assess_credit_readiness",
+                    "partial_args": null,
+                    "will_continue": null
+                  },
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": "AY89a18WhUiK-PpLl4ls7_LR5WNXns2sWoGMFOSvrV7jftWJVyhkJ4o-LJ8SkQcfSDS6Oz70Ld2w7_Cn8_oHr3G7sX-OlNyloiXIdLkC4ZrUH2a1W4hWP9uYapGizP2ZBOZSolJxUwDSpyYuMy5qfeYiCM6XxFdQxwDVijaaGj4=",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "99968d2f-2888-40ba-ae04-4154a732cdc6"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 13,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 13
+                }
+              ],
+              "prompt_token_count": 1217,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1217
+                }
+              ],
+              "thoughts_token_count": 14,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 1244,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "99968d2f-2888-40ba-ae04-4154a732cdc6"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": [],
+            "branch": null,
+            "id": "85c7883c-b7b6-4390-8242-c10902060c49",
+            "timestamp": 1782855961.374009
+          },
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": {
+                    "will_continue": null,
+                    "scheduling": null,
+                    "parts": null,
+                    "id": "adk-958b226e-f6b0-4743-b888-1ff48d81fa8a",
+                    "name": "assess_credit_readiness",
+                    "response": {
+                      "status": "success",
+                      "metrics": {
+                        "total_inflow": 500.0,
+                        "total_outflow": 150.0,
+                        "net_cash_flow": 350.0,
+                        "expense_ratio_pct": 30.0,
+                        "transaction_count": 2,
+                        "credit_readiness_level": "Low (Insufficient transaction history)",
+                        "indicator": "RED",
+                        "assessment_details": "The business has too few recorded transactions to establish a stable cash flow profile."
+                      }
+                    }
+                  },
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "credit_metrics": {
+                  "total_inflow": 500.0,
+                  "total_outflow": 150.0,
+                  "net_cash_flow": 350.0,
+                  "expense_ratio_pct": 30.0,
+                  "transaction_count": 2,
+                  "credit_readiness_level": "Low (Insufficient transaction history)",
+                  "indicator": "RED",
+                  "assessment_details": "The business has too few recorded transactions to establish a stable cash flow profile."
+                }
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "1b3b294e-e73e-4617-b2e1-ac624b29d4a3",
+            "timestamp": 1782855962.6840446
+          },
+          {
+            "model_version": "gemini-3-flash-preview",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": {
+                    "id": "adk-a3f0df7d-3a9b-4e48-b7d0-d8de9d93c302",
+                    "args": {},
+                    "name": "generate_ledger_report",
+                    "partial_args": null,
+                    "will_continue": null
+                  },
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": "AY89a18iFVeZbcIQiYRSCTu9pVwnDeXOnIhG4sm4yrHrTUpUoNi-ikLGPQvTn_74RWZ-DWZl5vPtZTkdjzLqEYzhzR5hAnD5we4QnWO1-bWrWgEl8zPI5FvW-YNYK63rEL_iJvrQyLBkgvwGXgIPWadoMRylGAZY03PVm0OKa7VdiX7b6yBNYQ==",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "a509e693-32f6-48ad-8c85-60af092ba18e"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 12,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 12
+                }
+              ],
+              "prompt_token_count": 1319,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1319
+                }
+              ],
+              "thoughts_token_count": 16,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 1347,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "a509e693-32f6-48ad-8c85-60af092ba18e"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": [],
+            "branch": null,
+            "id": "2c28b6fd-4fac-40bf-9083-0e516be67f59",
+            "timestamp": 1782855962.6899323
+          },
+          {
+            "model_version": null,
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": {
+                    "will_continue": null,
+                    "scheduling": null,
+                    "parts": null,
+                    "id": "adk-a3f0df7d-3a9b-4e48-b7d0-d8de9d93c302",
+                    "name": "generate_ledger_report",
+                    "response": {
+                      "status": "success",
+                      "artifact_name": "momo_ledger_report.md",
+                      "version": 0,
+                      "report_summary": "# 🇬🇭 MoMo Ledger: Credit Readiness & Business Statement\n\n## 📈 Financial Health Summary\n* **Total Business Inflows (Revenues)**: GHS 500.00\n* **Total Business Outflows (Expenses)**: GHS 150.00\n* **Net Cash Flow**: GHS 350.00\n* **Expense-to-Revenues Ratio**: 30.0%\n* **Transaction Count**: 2\n\n## 🛡️ Credit Readiness Profile\n* **Assessment Level**: **Low (Insufficient transaction history)**\n* **Risk Indicator**: `RED`\n* **Assessment Details**: The business has too few recorded transactions to establish a stable cash flow profile.\n\n## 📝 Categorized Ledger\n| Date | Category | Counterparty | Type | Amount (GHS) |\n| :--- | :--- | :--- | :--- | :--- |\n| 2026-06-28 | sales | Abena Osei | deposit | 500.00 |\n| 2026-06-29 | inventory | Restock-Co | withdrawal | 150.00 |"
+                    }
+                  },
+                  "inline_data": null,
+                  "text": null,
+                  "thought": null,
+                  "thought_signature": null,
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "user"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": null,
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": null,
+            "usage_metadata": null,
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {},
+              "artifact_delta": {
+                "momo_ledger_report.md": 0
+              },
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "ae7b111f-5cf2-4a12-a96f-0ea7eab1e638",
+            "timestamp": 1782855963.6117368
+          },
+          {
+            "model_version": "gemini-3-flash-preview",
+            "content": {
+              "parts": [
+                {
+                  "media_resolution": null,
+                  "code_execution_result": null,
+                  "executable_code": null,
+                  "file_data": null,
+                  "function_call": null,
+                  "function_response": null,
+                  "inline_data": null,
+                  "text": "I have analyzed your MoMo transactions and generated your business ledger. Here is the summary of your financial health and credit readiness:\n\n### 📊 **Financial Summary**\n*   **Total Revenue (Sales):** GHS 500.00\n*   **Total Expenses (Inventory):** GHS 150.00\n*   **Net Cash Flow:** GHS 350.00\n*   **Expense Ratio:** 30%\n\n### 🛡️ **Credit Readiness Assessment**\n*   **Readiness Level:** **Low (Insufficient transaction history)**\n*   **Status:** 🔴 Red\n*   **Advice:** You have a healthy net cash flow, but your transaction history is currently too short for most lenders. To improve your credit readiness, continue processing your business sales and expenses through this MoMo account consistently for the next 3 to 6 months.\n\n---\n\n### 📝 **Categorized Transaction Ledger**\n| Date | Category | Description | Amount (GHS) |\n| :--- | :--- | :--- | :--- |\n| 2026-06-28 | Sales | Received from Abena Osei | + 500.00 |\n| 2026-06-29 | Inventory | Paid to Restock-Co | - 150.00 |\n\n---\n**Report Saved:** A full Markdown version of this report (`momo_ledger_report.md`) has been generated for your records. \n\n*Would you like me to explain this summary in a local language like Twi or Ga?*",
+                  "thought": null,
+                  "thought_signature": "AY89a1_fgK3fQ3wA6_t-sjzHAzVvFzIL6ntoUzsaA8kZ05DuD-QI4R5Bbv-Na-y8fjvQus_X2fBn3vHFo-8Zu6LTBnfjVGSS_KSYSluHt0NeBV_Aq3Fv15lph2OolYRyoImHnD7EfIdeRPmZMRV3u6feDX6uT1h6EpHMd41ighxqpDcKnFhItC9EykeuW6Vr10vXFZM06T7aZzy6Pqn60Kd1eQrmluxhQ_cuLuc3e8uXOoQcW23Y09CSHFkM7T_3fG1mxgtXIA==",
+                  "video_metadata": null,
+                  "tool_call": null,
+                  "tool_response": null,
+                  "part_metadata": null
+                }
+              ],
+              "role": "model"
+            },
+            "grounding_metadata": null,
+            "partial": null,
+            "turn_complete": null,
+            "turn_complete_reason": null,
+            "finish_reason": "STOP",
+            "error_code": null,
+            "error_message": null,
+            "interrupted": null,
+            "custom_metadata": {
+              "__llm_request_key__": "ec12ae2f-fcbe-4b25-b4bb-41ebe0c13179"
+            },
+            "usage_metadata": {
+              "cache_tokens_details": null,
+              "cached_content_token_count": null,
+              "candidates_token_count": 345,
+              "candidates_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 345
+                }
+              ],
+              "prompt_token_count": 1627,
+              "prompt_tokens_details": [
+                {
+                  "modality": "TEXT",
+                  "token_count": 1627
+                }
+              ],
+              "thoughts_token_count": 30,
+              "tool_use_prompt_token_count": null,
+              "tool_use_prompt_tokens_details": null,
+              "total_token_count": 2002,
+              "traffic_type": "ON_DEMAND"
+            },
+            "live_session_resumption_update": null,
+            "live_session_id": null,
+            "go_away": null,
+            "input_transcription": null,
+            "output_transcription": null,
+            "avg_logprobs": null,
+            "logprobs_result": null,
+            "cache_metadata": null,
+            "citation_metadata": null,
+            "interaction_id": null,
+            "invocation_id": "e-8ef13c82-9763-49f5-bfde-a9c6e71652a4",
+            "author": "momo_ledger_assistant",
+            "actions": {
+              "skip_summarization": null,
+              "state_delta": {
+                "__llm_request_key__": "ec12ae2f-fcbe-4b25-b4bb-41ebe0c13179"
+              },
+              "artifact_delta": {},
+              "transfer_to_agent": null,
+              "escalate": null,
+              "requested_auth_configs": {},
+              "requested_tool_confirmations": {},
+              "compaction": null,
+              "end_of_agent": null,
+              "agent_state": null,
+              "rewind_before_invocation_id": null,
+              "render_ui_widgets": null
+            },
+            "long_running_tool_ids": null,
+            "branch": null,
+            "id": "be76f548-9063-43bc-b917-e22ea2c2e01b",
+            "timestamp": 1782855963.6189978
+          }
+        ],
+        "last_update_time": 1782855963.6189978
+      },
+      "user_id": "eval_user"
+    }
+  ],
+  "creation_timestamp": 1782855975.2782645
+}

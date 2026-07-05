@@ -156,3 +156,41 @@ When an image statement (screenshot) is uploaded, the system coordinates extract
 2. The image is passed directly to the Gemini 3.5 Flash multimodal model using the system instruction:
    > *"You are an expert OCR and document intelligence engine. Extract all Mobile Money (MoMo) transaction records from the provided screenshot. Return the raw transaction lines exactly as text logs, preserving dates, counterparties, direction, and transaction IDs."*
 3. The extracted text is then forwarded directly to the regex parser engine (`parse_momo_statement`) to yield structured dictionary entries, completely bypassing manual OCR templates.
+
+---
+
+## 5. CI/CD & Workload Identity Federation (WIF)
+
+For secure and automated deployment to Google Cloud Run, the system uses a keyless **OIDC-based authentication** pipeline integrated with **GitHub Actions**.
+
+### 5.1 Authentication Flow
+Instead of using long-lived JSON keys, GitHub Actions retrieves short-lived access tokens from GCP dynamically during runtime:
+
+```
+[GitHub Actions Runner]                     [Google STS Pool]                   [GCP Service Account]
+          |                                         |                                     |
+          | 1. Request OIDC Token (id-token:write)   |                                     |
+          +---------------------------------------->|                                     |
+          |                                         |                                     |
+          | 2. Validate OIDC assertion claims       |                                     |
+          |    (matches Hou-dini/momo-ledger)       |                                     |
+          |    and issue Google token               |                                     |
+          |<----------------------------------------+                                     |
+          |                                                                               |
+          | 3. Impersonate using TokenCreator role                                         |
+          +------------------------------------------------------------------------------>|
+          |                                                                               |
+          | 4. Deploy service and push container images                                   |
+          |<------------------------------------------------------------------------------+
+```
+
+### 5.2 Workload Identity Configuration
+* **Identity Pool**: `github-pool` (Scope global)
+* **Pool Provider**: `github-provider` (Issuer: `https://token.actions.githubusercontent.com`)
+* **Repository Constraints Attribute Mapping**:
+  * `google.subject` = `assertion.sub`
+  * `attribute.repository` = `assertion.repository`
+  * `attribute.repository_owner` = `assertion.repository_owner`
+* **Attribute Condition**: `assertion.repository == 'Hou-dini/momo-ledger'` (only allows builds from our specific repository).
+* **Impersonation Target**: `momo-ledger-deployer@vibe-coding-intensive-course.iam.gserviceaccount.com` (assigned roles: `roles/run.admin`, `roles/artifactregistry.admin`, `roles/storage.admin`, and `roles/iam.serviceAccountUser`).
+

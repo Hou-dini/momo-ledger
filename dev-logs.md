@@ -53,3 +53,25 @@ This log serves as a chronological record of implementation steps, development s
 ### Pitfall 4: Static Summaries vs. Multi-Statement Aggregation
 * **Issue**: The P&L cards and credit scoring indicators on the dashboard failed to update when uploading multiple statements or when correcting categories, as they pulled from a static database entry.
 * **Fix**: Rewrote `/report` and `/score` handlers in [routes.py](./app/routes.py) to aggregate metrics dynamically from the live `transactions` table.
+
+---
+
+## Session Log: July 5, 2026
+
+### 1. GitHub Actions CI/CD Scaffolding
+* **Goal**: Enable fully automated staging and production deployment of the Cloud Run backend via GitHub Actions.
+* **Changes**:
+  * Ran `scaffold enhance` to bootstrap workflows for pull request checks (`pr_checks.yaml`), dev/staging deploys (`staging.yaml`), and manual production deployment promotions (`deploy-to-prod.yaml`).
+  * Created `Dockerfile` configuring the container runtime for Python slim and compiling the UV workspace.
+  * Corrected container startup instruction inside [Dockerfile](./Dockerfile) to run our custom bookkeeping routes `app.routes:app` instead of the default agent playground server.
+
+### 2. Workload Identity Federation (WIF) Scaffolding
+* **Goal**: Set up secure, keyless authentication between GitHub Actions and Google Cloud Platform (GCP) using OpenID Connect (OIDC).
+* **Changes**:
+  * Activated `iamcredentials` API on the project.
+  * Created a global pool `github-pool` and OIDC identity provider `github-provider` mapping attributes to `Hou-dini/momo-ledger` repository assertions.
+  * Created a deployment service account `momo-ledger-deployer` and bound repository OIDC credentials.
+  * Configured IAM roles for Artifact Registry, Cloud Run deployment administration, GCS buckets storage, and Service Account impersonation user bindings.
+  * Provisioned Artifact Registry repository `momo-ledger-repo` and staging logs bucket `vibe-coding-intensive-course-staging-logs`.
+  * Hardcoded the Workload Provider URIs and account IDs directly in workflow files to allow keyless authentication without requiring manual secret configurations on GitHub.
+

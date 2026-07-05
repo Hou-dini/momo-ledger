@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import logging
-import os
 from locust import HttpUser, between, task
 
 # Configure logging
@@ -33,8 +32,6 @@ class MoMoLedgerUser(HttpUser):
         """Simulates viewing the financial dashboard report."""
         merchant_id = "merchant_123"
         headers = {"Accept": "application/json"}
-        if os.environ.get("_ID_TOKEN"):
-            headers["Authorization"] = f"Bearer {os.environ['_ID_TOKEN']}"
             
         with self.client.get(
             f"/report/{merchant_id}",
@@ -52,8 +49,6 @@ class MoMoLedgerUser(HttpUser):
         """Simulates viewing the credit score profile."""
         merchant_id = "merchant_123"
         headers = {"Accept": "application/json"}
-        if os.environ.get("_ID_TOKEN"):
-            headers["Authorization"] = f"Bearer {os.environ['_ID_TOKEN']}"
             
         with self.client.get(
             f"/score/{merchant_id}",
@@ -71,8 +66,6 @@ class MoMoLedgerUser(HttpUser):
         """Simulates viewing the bookkeeping ledger transactions."""
         merchant_id = "merchant_123"
         headers = {"Accept": "application/json"}
-        if os.environ.get("_ID_TOKEN"):
-            headers["Authorization"] = f"Bearer {os.environ['_ID_TOKEN']}"
             
         with self.client.get(
             f"/transactions/{merchant_id}",

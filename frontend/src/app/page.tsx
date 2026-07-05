@@ -24,6 +24,10 @@ import {
   Loader2,
 } from "lucide-react";
 
+const API_BASE = typeof window !== "undefined"
+  ? (window.location.port === "3000" ? "http://localhost:8000" : "")
+  : "";
+
 export default function Home() {
   // Merchant details
   const [merchantId, setMerchantId] = useState("merchant_123");
@@ -56,19 +60,19 @@ export default function Home() {
   const fetchMerchantData = async () => {
     try {
       // 1. Transactions
-      const txRes = await fetch(`http://localhost:8000/transactions/${merchantId}`);
+      const txRes = await fetch(`${API_BASE}/transactions/${merchantId}`);
       if (txRes.ok) {
         const data = await txRes.json();
         setTransactions(data.transactions || []);
       }
       // 2. Summary
-      const sumRes = await fetch(`http://localhost:8000/report/${merchantId}`);
+      const sumRes = await fetch(`${API_BASE}/report/${merchantId}`);
       if (sumRes.ok) {
         const data = await sumRes.json();
         setSummary(data.summary || null);
       }
       // 3. Profile
-      const profRes = await fetch(`http://localhost:8000/score/${merchantId}`);
+      const profRes = await fetch(`${API_BASE}/score/${merchantId}`);
       if (profRes.ok) {
         const data = await profRes.json();
         setProfile(data.profile || null);
@@ -125,7 +129,7 @@ export default function Home() {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/upload", {
+      const res = await fetch(`${API_BASE}/upload`, {
         method: "POST",
         body: formData,
       });
@@ -164,7 +168,7 @@ export default function Home() {
     formData.append("category", newCategory);
 
     try {
-      const res = await fetch("http://localhost:8000/review", {
+      const res = await fetch(`${API_BASE}/review`, {
         method: "POST",
         body: formData,
       });

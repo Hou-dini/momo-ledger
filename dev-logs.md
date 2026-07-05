@@ -75,3 +75,12 @@ This log serves as a chronological record of implementation steps, development s
   * Provisioned Artifact Registry repository `momo-ledger-repo` and staging logs bucket `vibe-coding-intensive-course-staging-logs`.
   * Hardcoded the Workload Provider URIs and account IDs directly in workflow files to allow keyless authentication without requiring manual secret configurations on GitHub.
 
+### 3. Unified Frontend-Backend Container Build
+* **Goal**: Mount and serve the Next.js React frontend directly from the FastAPI Python backend inside the same Cloud Run service container, reducing hosting costs and deployment complexity.
+* **Changes**:
+  * Set `output: "export"` in [next.config.ts](./frontend/next.config.ts) to statically compile the frontend to static files.
+  * Dynamically configured the client-side `API_BASE` inside [page.tsx](./frontend/src/app/page.tsx) to automatically target the correct deployed domain relative to the window origin.
+  * Added `StaticFiles` mounting inside [routes.py](./app/routes.py) to map root requests (`/`) to the static assets directory.
+  * Updated [Dockerfile](./Dockerfile) into a multi-stage Docker build that generates the static HTML/CSS/JS files in a Node build stage and copies it into the python runner runtime.
+
+

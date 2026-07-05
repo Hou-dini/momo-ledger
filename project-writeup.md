@@ -194,3 +194,26 @@ Instead of using long-lived JSON keys, GitHub Actions retrieves short-lived acce
 * **Attribute Condition**: `assertion.repository == 'Hou-dini/momo-ledger'` (only allows builds from our specific repository).
 * **Impersonation Target**: `momo-ledger-deployer@vibe-coding-intensive-course.iam.gserviceaccount.com` (assigned roles: `roles/run.admin`, `roles/artifactregistry.admin`, `roles/storage.admin`, and `roles/iam.serviceAccountUser`).
 
+---
+
+## 6. Single-Container Unified Architecture
+
+To keep infrastructure costs at a minimum and simplify deployments, both the Next.js React frontend and the FastAPI backend are built and packaged into a single unified Docker container.
+
+### 6.1 Multi-Stage Container Packaging
+1. **Frontend Builder Stage**: Uses Node.js to download packages, compile CSS variables, compile TypeScript types, and export statically built assets into a clean, optimized HTML/CSS/JS target directory (`frontend/out`).
+2. **Backend Runner Stage**: Installs the Python FastAPI UV virtual environment, copies the python source, and mounts the statically built assets from Stage 1 into the python environment under a dedicated `/code/static` folder.
+
+### 6.2 Routing & Origin Resolution
+FastAPI serves both the API endpoints and the static frontend assets on a single, shared port (`8080`):
+* **API Endpoints**: Explicit FastAPI routes (`/upload`, `/report`, etc.) are matched first.
+* **Static Assets**: Root requests (`/`) and static assets (CSS, JS) are mounted at the very end of the routing lifecycle (`app.mount("/", StaticFiles(directory="static", html=True), name="static")`) to act as a fallback, serving the dashboard page directly to the browser.
+* **Client-Side API Mapping**: The client automatically maps fetches using a dynamic check:
+  ```typescript
+  const API_BASE = typeof window !== "undefined"
+    ? (window.location.port === "3000" ? "http://localhost:8000" : "")
+    : "";
+  ```
+  This ensures that in local development, it queries your local FastAPI service (`http://localhost:8000`), while in the cloud, it makes seamless relative requests on the exact same port and origin without throwing cross-origin (CORS) exceptions.
+
+

@@ -1,17 +1,17 @@
-# Copyright 2026 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Stage 1: Build the Next.js frontend
+FROM node:20-alpine AS frontend-builder
 
+WORKDIR /frontend
+
+# Copy frontend dependency configurations
+COPY ./frontend/package*.json ./
+RUN npm ci
+
+# Copy frontend source and compile static build files
+COPY ./frontend/ ./
+RUN npm run build
+
+# Stage 2: Create python runtime
 FROM python:3.12-slim
 
 RUN pip install --no-cache-dir uv==0.8.13
@@ -19,10 +19,12 @@ RUN pip install --no-cache-dir uv==0.8.13
 WORKDIR /code
 
 COPY ./pyproject.toml ./README.md ./uv.lock* ./
-
 COPY ./app ./app
 
 RUN uv sync --frozen
+
+# Copy the statically compiled Next.js build output from the builder stage
+COPY --from=frontend-builder /frontend/out ./static
 
 ARG COMMIT_SHA=""
 ENV COMMIT_SHA=${COMMIT_SHA}

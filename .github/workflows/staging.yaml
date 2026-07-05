@@ -85,14 +85,17 @@ jobs:
 
       - name: Fetch ID Token
         id: fetch-token
-        run: |
-          _ID_TOKEN=$(gcloud auth print-identity-token -q)
-          echo "::add-mask::${_ID_TOKEN}"
-          echo "_id_token=${_ID_TOKEN}" >> $GITHUB_OUTPUT
+        uses: 'google-github-actions/auth@v2'
+        with:
+          create_credentials_file: false
+          workload_identity_provider: 'projects/70624156468/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'momo-ledger-deployer@vibe-coding-intensive-course.iam.gserviceaccount.com'
+          id_token_audience: ${{ steps.fetch-url.outputs._staging_url }}
+          id_token_include_email: true
 
       - name: Run load test
         run: |
-          export _ID_TOKEN="${{ steps.fetch-token.outputs._id_token }}"
+          export _ID_TOKEN="${{ steps.fetch-token.outputs.id_token }}"
           export _STAGING_URL="${{ steps.fetch-url.outputs._staging_url }}"
           uvx locust==2.31.1 \
           -f tests/load_test/load_test.py \

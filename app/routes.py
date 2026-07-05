@@ -76,7 +76,7 @@ async def upload_statement(
         
     try:
         # Create ADK runner session
-        session = session_service.create_session_sync(user_id=merchant_id, app_name="app")
+        session = await session_service.create_session(user_id=merchant_id, app_name="app")
         runner = Runner(
             agent=root_agent,
             session_service=session_service,
@@ -89,15 +89,17 @@ async def upload_statement(
             parts=[types.Part.from_text(text=user_payload)]
         )
         
-        # Run single-agent pipeline synchronously to completion
-        events = list(runner.run(
+        # Run single-agent pipeline asynchronously to completion
+        events = []
+        async for event in runner.run_async(
             new_message=message,
             user_id=merchant_id,
             session_id=session.id
-        ))
+        ):
+            events.append(event)
         
         # Retrieve parsed states
-        session_obj = session_service.get_session_sync(
+        session_obj = await session_service.get_session(
             app_name="app",
             user_id=merchant_id,
             session_id=session.id

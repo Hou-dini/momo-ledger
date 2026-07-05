@@ -86,7 +86,7 @@ jobs:
       - name: Fetch ID Token
         id: fetch-token
         run: |
-          _ID_TOKEN=$(gcloud auth print-identity-token --impersonate-service-account=momo-ledger-deployer@vibe-coding-intensive-course.iam.gserviceaccount.com -q)
+          _ID_TOKEN=$(gcloud auth print-identity-token -q)
           echo "::add-mask::${_ID_TOKEN}"
           echo "_id_token=${_ID_TOKEN}" >> $GITHUB_OUTPUT
 

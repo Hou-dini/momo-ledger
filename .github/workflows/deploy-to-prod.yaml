@@ -85,3 +85,12 @@ jobs:
             --region us-east1 \
             --image us-east1-docker.pkg.dev/vibe-coding-intensive-course/momo-ledger-repo/momo-ledger:${{ github.sha }}
 
+      - name: Make Production Service Public
+        run: |
+          gcloud run services add-iam-policy-binding momo-ledger \
+            --region us-east1 \
+            --project vibe-coding-intensive-course \
+            --member "allUsers" \
+            --role "roles/run.invoker" \
+            --quiet
+

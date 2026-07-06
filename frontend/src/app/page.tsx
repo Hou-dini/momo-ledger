@@ -430,7 +430,9 @@ export default function Home() {
                 </div>
 
                 <button
-                  onClick={() => alert("Lender verification report generated as PDF!")}
+                  onClick={() => {
+                    window.location.href = `${API_BASE}/download-pdf/${merchantId}`;
+                  }}
                   className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm shadow-md transition-all whitespace-nowrap flex-shrink-0"
                 >
                   <Download className="w-4 h-4" />

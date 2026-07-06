@@ -1,3 +1,4 @@
+import io
 import os
 import shutil
 import uuid
@@ -5,6 +6,7 @@ from datetime import datetime
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from google.adk.artifacts import InMemoryArtifactService
 from google.adk.runners import Runner
@@ -13,6 +15,7 @@ from google.genai import types
 
 import app.core.database as db
 from app.agents.coordinator import root_agent
+from app.services.pdf_generator import generate_lender_pdf
 from app.services.scoring import calculate_merchant_metrics
 
 app = FastAPI(title="MoMo Ledger API")
@@ -263,6 +266,35 @@ async def get_score(merchant_id: str):
             "assessment_details": metrics["assessment_details"],
         },
     }
+
+
+@app.get("/download-pdf/{merchant_id}")
+async def download_pdf_report(merchant_id: str):
+    """Generates and returns the beautifully compiled credit report as a PDF download."""
+    try:
+        pdf_bytes = generate_lender_pdf(merchant_id)
+        # Prepare business name for the filename
+        merchant = db.get_merchant(merchant_id)
+        biz_name = merchant.get("business_name", "merchant") if merchant else "merchant"
+        safe_biz_name = (
+            "".join(c for c in biz_name if c.isalnum() or c in (" ", "_", "-"))
+            .strip()
+            .replace(" ", "_")
+        )
+        filename = f"{safe_biz_name}_credit_report.pdf"
+
+        return StreamingResponse(
+            io.BytesIO(pdf_bytes),
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={filename}"},
+        )
+    except ValueError as ve:
+        raise HTTPException(status_code=404, detail=str(ve))
+    except Exception as e:
+        import traceback
+
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Failed to generate PDF: {e!s}")
 
 
 static_dir = os.path.join(

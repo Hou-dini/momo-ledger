@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 🏦 MoMo Ledger
 
@@ -332,4 +332,3 @@ This project is licensed under the **Apache License 2.0** — see the [LICENSE](
 **MoMo Ledger** — *Turning mobile money into financial opportunity.* 🇬🇭
 
 </div>
-]]>

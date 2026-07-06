@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import logging
+
 from locust import HttpUser, between, task
 
 # Configure logging
@@ -32,29 +33,31 @@ class MoMoLedgerUser(HttpUser):
         """Simulates viewing the financial dashboard report."""
         merchant_id = "merchant_123"
         headers = {"Accept": "application/json"}
-            
+
         with self.client.get(
             f"/report/{merchant_id}",
             name="/report/{merchant_id}",
             headers=headers,
-            catch_response=True
+            catch_response=True,
         ) as response:
             if response.status_code == 200:
                 response.success()
             else:
-                response.failure(f"Failed to fetch report, code: {response.status_code}")
+                response.failure(
+                    f"Failed to fetch report, code: {response.status_code}"
+                )
 
     @task(2)
     def view_score(self) -> None:
         """Simulates viewing the credit score profile."""
         merchant_id = "merchant_123"
         headers = {"Accept": "application/json"}
-            
+
         with self.client.get(
             f"/score/{merchant_id}",
             name="/score/{merchant_id}",
             headers=headers,
-            catch_response=True
+            catch_response=True,
         ) as response:
             if response.status_code == 200:
                 response.success()
@@ -66,14 +69,16 @@ class MoMoLedgerUser(HttpUser):
         """Simulates viewing the bookkeeping ledger transactions."""
         merchant_id = "merchant_123"
         headers = {"Accept": "application/json"}
-            
+
         with self.client.get(
             f"/transactions/{merchant_id}",
             name="/transactions/{merchant_id}",
             headers=headers,
-            catch_response=True
+            catch_response=True,
         ) as response:
             if response.status_code == 200:
                 response.success()
             else:
-                response.failure(f"Failed to fetch transactions, code: {response.status_code}")
+                response.failure(
+                    f"Failed to fetch transactions, code: {response.status_code}"
+                )

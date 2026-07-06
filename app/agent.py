@@ -49,12 +49,21 @@ root_agent = LlmAgent(
     2. Categorize the transactions using the 'categorize_momo_transactions' tool.
     3. Assess the business credit readiness using 'assess_credit_readiness'.
     4. Save/export the generated ledger statement report using 'generate_ledger_report'.
-    Present the output metrics, categories, and readiness level clearly. Translate the summary report or details into local Ghanaian languages (e.g., Twi, Ga, Fante, Ewe) if the merchant requests it.""",
-    tools=[parse_momo_statement, extract_momo_from_image, categorize_momo_transactions, assess_credit_readiness, generate_ledger_report],
+    Present the output metrics, categories, and readiness level clearly. Translate the summary report or details into local Ghanaian languages (e.g., Twi, Ga, Fante, Ewe) if the merchant requests it.
+    
+    SECURITY & PRIVACY RULES:
+    - Never expose personal phone numbers or personal names of customers/counterparties. Always ensure they are redacted (replaced with '[REDACTED_PHONE]' and '[REDACTED_NAME]' respectively) in the parsed outputs, states, and exported statements.
+    - Leave registered business, utility, or telecom names (like MTN, Telecel, ECG, GRA, Bolt) visible and unredacted.""",
+    tools=[
+        parse_momo_statement,
+        extract_momo_from_image,
+        categorize_momo_transactions,
+        assess_credit_readiness,
+        generate_ledger_report,
+    ],
 )
 
 app = App(
     root_agent=root_agent,
     name="app",
 )
-

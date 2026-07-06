@@ -52,7 +52,7 @@ select = [
     "UP", # pyupgrade
     "RUF", # ruff specific rules
 ]
-ignore = ["E501", "C901", "B006"] # ignore line too long, too complex
+ignore = ["E501", "C901", "B006", "B008", "E402", "B904"] # ignore line too long, too complex, FastAPI route defaults, late imports, and raise from
 
 [tool.ruff.lint.isort]
 known-first-party = ["app", "frontend"]

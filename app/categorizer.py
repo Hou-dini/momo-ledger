@@ -1,5 +1,6 @@
 from google.adk.tools.tool_context import ToolContext
 
+
 def categorize_momo_transactions(tool_context: ToolContext) -> dict:
     """Categorizes the parsed transactions into standard accounting categories.
     Reads transactions from the session state, evaluates keywords, and tags categories.
@@ -12,14 +13,51 @@ def categorize_momo_transactions(tool_context: ToolContext) -> dict:
     """
     transactions = tool_context.state.get("parsed_transactions")
     if not transactions:
-        return {"status": "error", "message": "No parsed transactions found. Run parse_momo_statement first."}
+        return {
+            "status": "error",
+            "message": "No parsed transactions found. Run parse_momo_statement first.",
+        }
 
     # Standard business keywords for category matching in Ghana
     rules = {
-        "sales": [r"payment received", r"customer", r"sales", r"credit", r"momo merchant", r"received from"],
-        "inventory": [r"wholesale", r"supplier", r"distributor", r"goods", r"restock", r"purchase from"],
-        "logistics": [r"transport", r"fuel", r"delivery", r"cargo", r"bolt", r"yango", r"uber", r"dispatch"],
-        "utilities": [r"ecg", r"electricity", r"gwcl", r"water", r"dstv", r"gotv", r"telecel", r"mtn credit", r"internet", r"data bundle"],
+        "sales": [
+            r"payment received",
+            r"customer",
+            r"sales",
+            r"credit",
+            r"momo merchant",
+            r"received from",
+        ],
+        "inventory": [
+            r"wholesale",
+            r"supplier",
+            r"distributor",
+            r"goods",
+            r"restock",
+            r"purchase from",
+        ],
+        "logistics": [
+            r"transport",
+            r"fuel",
+            r"delivery",
+            r"cargo",
+            r"bolt",
+            r"yango",
+            r"uber",
+            r"dispatch",
+        ],
+        "utilities": [
+            r"ecg",
+            r"electricity",
+            r"gwcl",
+            r"water",
+            r"dstv",
+            r"gotv",
+            r"telecel",
+            r"mtn credit",
+            r"internet",
+            r"data bundle",
+        ],
         "salaries": [r"salary", r"wages", r"staff", r"allowance", r"employee"],
         "taxes": [r"gra", r"tax", r"revenue authority", r"e-levy", r"levy"],
     }
@@ -62,5 +100,5 @@ def categorize_momo_transactions(tool_context: ToolContext) -> dict:
         "status": "success",
         "count": len(categorized),
         "category_totals": category_totals,
-        "transactions": categorized
+        "transactions": categorized,
     }

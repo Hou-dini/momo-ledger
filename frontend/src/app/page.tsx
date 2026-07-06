@@ -35,10 +35,7 @@ export default function Home() {
   const [ownerName, setOwnerName] = useState("Kofi Ananse");
   const [phone, setPhone] = useState("0541234567");
 
-  // Ingestion inputs
-  const [statementText, setStatementText] = useState(
-    "Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001.\nYou have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002."
-  );
+  const [statementText, setStatementText] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   // States
@@ -718,6 +715,13 @@ export default function Home() {
                 </p>
               </div>
 
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-600 flex items-start gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-slate-900">Privacy Safeguard Active:</span> All uploaded screenshots and pasted transaction texts undergo automated PII scrubbing (phone numbers and names are redacted) before being stored or processed by our AI models.
+                </div>
+              </div>
+
               <form onSubmit={handleUpload} className="flex flex-col gap-5 text-sm">
                 {/* File Drop Area */}
                 <div>
@@ -761,7 +765,7 @@ export default function Home() {
                     onChange={(e) => setStatementText(e.target.value)}
                     rows={5}
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-slate-800 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-indigo-500 leading-relaxed"
-                    placeholder="Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001..."
+                    placeholder={"Received GHS 500.00 from Abena Osei on 2026-06-28 10:00:00. Transaction ID: 1001001.\nYou have paid GHS 150.00 to Restock-Co on 2026-06-29 11:00:00. Transaction ID: 1001002."}
                   ></textarea>
                 </div>
 

@@ -1,5 +1,6 @@
 from google.adk.tools.tool_context import ToolContext
 
+
 def assess_credit_readiness(tool_context: ToolContext) -> dict:
     """Performs financial analysis and credit-readiness checks on categorized transactions.
     Calculates net cash flow, business expense ratios, and evaluates credit readiness metrics.
@@ -14,7 +15,10 @@ def assess_credit_readiness(tool_context: ToolContext) -> dict:
     totals = tool_context.state.get("category_totals")
 
     if not categorized or not totals:
-        return {"status": "error", "message": "No categorized transactions found. Run categorize_momo_transactions first."}
+        return {
+            "status": "error",
+            "message": "No categorized transactions found. Run categorize_momo_transactions first.",
+        }
 
     total_inflow = 0.0
     total_outflow = 0.0
@@ -60,13 +64,10 @@ def assess_credit_readiness(tool_context: ToolContext) -> dict:
         "transaction_count": len(categorized),
         "credit_readiness_level": readiness,
         "indicator": color_code,
-        "assessment_details": details
+        "assessment_details": details,
     }
 
     # Store metrics in session state
     tool_context.state["credit_metrics"] = metrics
 
-    return {
-        "status": "success",
-        "metrics": metrics
-    }
+    return {"status": "success", "metrics": metrics}

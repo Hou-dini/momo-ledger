@@ -39,50 +39,67 @@ async def upload_statement(
     phone: str = Form(...),
     statement_text: str = Form(None),
     file: UploadFile = File(None),
+    files: list[UploadFile] = File(None),
 ):
-    """Ingests statement raw text or uploaded documents (PDFs/Screenshots),
+    """Ingests statement raw text or multiple uploaded documents (PDFs/Screenshots),
     creates a merchant profile, and executes the ADK agent workflow.
     """
     # 1. Upsert merchant record
     db.save_merchant(merchant_id, business_name, owner_name, phone)
 
-    user_payload = ""
-    image_path = None
+    all_files = []
+    if file and file.filename:
+        all_files.append(file)
+    if files:
+        for f in files:
+            if f.filename:
+                all_files.append(f)
 
-    if file:
-        if not file.filename:
-            raise HTTPException(
-                status_code=400, detail="Uploaded file has no filename."
-            )
-        file_ext = os.path.splitext(file.filename)[1].lower()
+    user_payloads = []
+
+    for f in all_files:
+        file_ext = os.path.splitext(f.filename or "")[1].lower()
         if file_ext not in [".png", ".jpg", ".jpeg", ".pdf", ".txt"]:
-            raise HTTPException(status_code=400, detail="Unsupported file format.")
+            raise HTTPException(
+                status_code=400, detail=f"Unsupported file format for {f.filename}."
+            )
 
         # Save file to upload directory
         file_id = str(uuid.uuid4())
         local_path = os.path.join(UPLOAD_DIR, f"{file_id}{file_ext}")
         with open(local_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+            shutil.copyfileobj(f.file, buffer)
 
         if file_ext in [".png", ".jpg", ".jpeg"]:
-            image_path = local_path
-            user_payload = (
-                f"Extract and analyze the MoMo screenshot located at: {image_path}"
+            user_payloads.append(
+                f"Extract and analyze the MoMo screenshot located at: {local_path}"
             )
-        else:
-            if file_ext == ".txt":
-                with open(local_path, encoding="utf-8") as f:
-                    user_payload = f.read()
-            else:
-                user_payload = f"Analyze my statement PDF at path: {local_path}"
+        elif file_ext == ".pdf":
+            user_payloads.append(
+                f"Extract and analyze the MoMo PDF statement located at: {local_path}"
+            )
+        elif file_ext == ".txt":
+            with open(local_path, encoding="utf-8") as file_read:
+                user_payloads.append(file_read.read())
 
-        # Append manual statement text if provided alongside the file
-        if statement_text:
-            user_payload += f"\nAlso parse and combine these manual transaction alerts:\n{statement_text}"
-    elif statement_text:
-        user_payload = statement_text
+    # Build user payload
+    if user_payloads:
+        user_payload = "\n\n".join(user_payloads)
     else:
-        raise HTTPException(status_code=400, detail="No file or text logs provided.")
+        user_payload = ""
+
+    # Append manual statement text if provided alongside the files
+    if statement_text:
+        if user_payload:
+            user_payload += f"\n\nAlso parse and combine these manual transaction alerts:\n{statement_text}"
+        else:
+            user_payload = statement_text
+
+    if not user_payload:
+        raise HTTPException(
+            status_code=400,
+            detail="No files or manual statement text logs were provided.",
+        )
 
     try:
         # Create ADK runner session

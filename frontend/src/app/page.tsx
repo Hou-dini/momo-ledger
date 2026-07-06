@@ -36,7 +36,7 @@ export default function Home() {
   const [phone, setPhone] = useState("0541234567");
 
   const [statementText, setStatementText] = useState("");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   // States
   const [loading, setLoading] = useState(false);
@@ -89,22 +89,22 @@ export default function Home() {
     setUploadStatus(null);
 
     // Client-side security & input validation
-    if (!selectedFile && !statementText.trim()) {
+    if (selectedFiles.length === 0 && !statementText.trim()) {
       setUploadStatus({
         type: "error",
-        message: "Please select a statement file or paste transaction alerts to process.",
+        message: "Please select one or more statement files or paste transaction alerts to process.",
       });
       return;
     }
 
-    if (selectedFile) {
-      const validExts = [".png", ".jpg", ".jpeg", ".pdf", ".txt"];
-      const fileName = selectedFile.name.toLowerCase();
+    const validExts = [".png", ".jpg", ".jpeg", ".pdf", ".txt"];
+    for (const file of selectedFiles) {
+      const fileName = file.name.toLowerCase();
       const isValid = validExts.some((ext) => fileName.endsWith(ext));
       if (!isValid) {
         setUploadStatus({
           type: "error",
-          message: `Security check failed: Unsupported file format "${selectedFile.name}". Allowed formats: PDF, PNG, JPG, TXT.`,
+          message: `Security check failed: Unsupported file format "${file.name}". Allowed formats: PDF, PNG, JPG, TXT.`,
         });
         return;
       }
@@ -119,9 +119,11 @@ export default function Home() {
     formData.append("owner_name", ownerName);
     formData.append("phone", phone);
 
-    if (selectedFile) {
-      formData.append("file", selectedFile);
-    } else if (statementText) {
+    selectedFiles.forEach((file) => {
+      formData.append("files", file);
+    });
+
+    if (statementText) {
       formData.append("statement_text", statementText);
     }
 
@@ -141,7 +143,7 @@ export default function Home() {
         type: "success",
         message: `Successfully parsed ${data.transaction_count} transactions! Credit metrics and ledger updated.`,
       });
-      setSelectedFile(null);
+      setSelectedFiles([]);
       await fetchMerchantData();
       setActiveTab("overview");
     } catch (err: any) {
@@ -732,17 +734,25 @@ export default function Home() {
                     <UploadCloud className="w-8 h-8 text-indigo-500 mb-2" />
                     <input
                       type="file"
+                      multiple
                       onChange={(e) => {
-                        if (e.target.files && e.target.files[0]) {
-                          setSelectedFile(e.target.files[0]);
+                        if (e.target.files) {
+                          setSelectedFiles(Array.from(e.target.files));
                         }
                       }}
                       className="w-full text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer text-xs"
                     />
-                    {selectedFile && (
-                      <span className="text-xs font-semibold text-emerald-600 mt-2 flex items-center gap-1">
-                        <CheckCircle2 className="w-3.5 h-3.5" /> Selected: {selectedFile.name}
-                      </span>
+                    {selectedFiles.length > 0 && (
+                      <div className="mt-2 flex flex-col gap-1 w-full text-left max-h-32 overflow-y-auto">
+                        <span className="text-xs font-semibold text-emerald-600 flex items-center gap-1">
+                          <CheckCircle2 className="w-3.5 h-3.5" /> Selected ({selectedFiles.length}):
+                        </span>
+                        <ul className="list-disc pl-5 text-[10px] text-slate-600">
+                          {selectedFiles.map((f, i) => (
+                            <li key={i} className="truncate">{f.name}</li>
+                          ))}
+                        </ul>
+                      </div>
                     )}
                   </div>
                 </div>

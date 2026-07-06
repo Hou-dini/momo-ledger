@@ -1,31 +1,38 @@
 import os
-import re
 
 from google.adk.tools import ToolContext
 from google.genai import Client, types
 
 
 def extract_momo_from_image(image_path: str, tool_context: ToolContext) -> dict:
-    """Extracts raw Mobile Money (MoMo) transaction details from an uploaded screenshot image.
-    Uses Gemini's multimodal vision features to perform text extraction and structure reconstruction.
+    """Extracts raw Mobile Money (MoMo) transaction details from an uploaded screenshot image or PDF statement.
+    Uses Gemini's multimodal features to perform text extraction and structure reconstruction.
 
     Args:
-        image_path: Absolute local path to the transaction screenshot (PNG/JPEG).
+        image_path: Absolute local path to the transaction document (PNG/JPEG/PDF).
 
     Returns:
         A dictionary containing parsed transaction listings and status flags.
     """
     if not image_path or not image_path.strip():
-        return {"status": "error", "message": "Image path is empty."}
+        return {"status": "error", "message": "Document path is empty."}
 
     if not os.path.exists(image_path):
-        return {"status": "error", "message": f"Image file not found at: {image_path}"}
-
-    # Ensure it has a valid image extension to mitigate arbitrary file execution
-    if not re.search(r"\.(png|jpe?g)$", image_path, re.IGNORECASE):
         return {
             "status": "error",
-            "message": "Unsupported file format. Only PNG, JPG, and JPEG are supported.",
+            "message": f"Document file not found at: {image_path}",
+        }
+
+    # Ensure it has a valid document extension
+    file_ext = os.path.splitext(image_path)[1].lower()
+    if file_ext == ".pdf":
+        mime_type = "application/pdf"
+    elif file_ext in [".png", ".jpg", ".jpeg"]:
+        mime_type = "image/png" if file_ext == ".png" else "image/jpeg"
+    else:
+        return {
+            "status": "error",
+            "message": "Unsupported file format. Only PDF, PNG, JPG, and JPEG are supported.",
         }
 
     try:
@@ -36,8 +43,8 @@ def extract_momo_from_image(image_path: str, tool_context: ToolContext) -> dict:
             image_bytes = f.read()
 
         prompt = """
-        You are a Mobile Money (MoMo) OCR and statement extraction agent.
-        Analyze this screenshot image containing MTN Mobile Money or other teleco transaction details.
+        You are a Mobile Money (MoMo) statement extraction agent.
+        Analyze this document containing MTN Mobile Money or other teleco transaction details.
         Extract every transaction and list them one by one in text format.
         For each transaction, reconstruct the standard SMS text alert format.
 
@@ -59,7 +66,7 @@ def extract_momo_from_image(image_path: str, tool_context: ToolContext) -> dict:
         response = client.models.generate_content(
             model="gemini-3.5-flash",
             contents=[
-                types.Part.from_bytes(data=image_bytes, mime_type="image/png"),
+                types.Part.from_bytes(data=image_bytes, mime_type=mime_type),
                 prompt,
             ],
         )
@@ -68,7 +75,7 @@ def extract_momo_from_image(image_path: str, tool_context: ToolContext) -> dict:
         if not extracted_text or not extracted_text.strip():
             return {
                 "status": "error",
-                "message": "No transaction text could be extracted from the screenshot.",
+                "message": "No transaction text could be extracted from the document.",
             }
 
         # Delegate the actual parsing, state storage, and anonymization to the existing parse_momo_statement tool
@@ -81,5 +88,5 @@ def extract_momo_from_image(image_path: str, tool_context: ToolContext) -> dict:
     except Exception as e:
         return {
             "status": "error",
-            "message": f"Failed to process screenshot image: {e!s}",
+            "message": f"Failed to process document: {e!s}",
         }

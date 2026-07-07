@@ -56,3 +56,5 @@ Ask the user: Option A (simple single-project) or Option B (full CI/CD pipeline 
 - **Run Python with `uv`**: `uv run python script.py`. Run `make install` first.
 - **Stop on repeated errors**: If the same error appears 3+ times, fix the root cause instead of retrying.
 - **Terraform conflicts** (Error 409): Use `terraform import` instead of retrying creation.
+- **ADK Trajectory Argument Matching**: When configuring order-based expected tool trajectory checks in evalsets, ensure expected `tool_uses` specify their exact arguments (`args`). Omitted or empty expected arguments trigger a mismatch if the agent passes parameters during runtime.
+- **Scoring Zero-State Handling**: When implementing financial scoring models, always explicitly intercept the zero-records (empty ledger) state early. Return a zeroed/red profile deterministic output rather than letting default ratios trigger false positive bonuses.

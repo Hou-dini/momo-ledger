@@ -5,6 +5,19 @@ def calculate_merchant_metrics(merchant_id: str) -> dict:
     """Calculates ledger metrics dynamically from all transactions in SQLite database."""
     txns = db.get_merchant_transactions(merchant_id)
 
+    if not txns:
+        return {
+            "revenue": 0.0,
+            "expenses": 0.0,
+            "profit": 0.0,
+            "cash_flow": 0.0,
+            "average_balance": 0.0,
+            "credit_score": 0,
+            "readiness_level": "Low",
+            "indicator": "RED",
+            "assessment_details": "No transaction history available. Please upload a Mobile Money statement or paste logs to generate your credit readiness profile.",
+        }
+
     total_inflow = 0.0
     total_outflow = 0.0
 

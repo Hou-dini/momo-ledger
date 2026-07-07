@@ -28,6 +28,9 @@ def generate_lender_pdf(merchant_id: str) -> bytes:
         topMargin=40,
         bottomMargin=40,
     )
+    doc.title = "MoMo Ledger Credit Verification Report"
+    doc.author = "MoMo Ledger AI Platform"
+    doc.subject = f"Merchant Credit Verification - ID: {merchant_id}"
 
     story = []
     styles = getSampleStyleSheet()

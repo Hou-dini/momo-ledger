@@ -1,10 +1,12 @@
 import io
 import os
 import shutil
+import time
 import uuid
+from collections import defaultdict
 from datetime import datetime
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -28,6 +30,47 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 1. Simple In-Memory IP Rate Limiter for Ingestion
+RATE_LIMIT_WINDOW = 60  # seconds
+MAX_REQUESTS_PER_IP = 10  # max upload requests per IP per minute
+request_history = defaultdict(list)
+
+
+@app.middleware("http")
+async def rate_limit_middleware(request: Request, call_next):
+    if request.method == "POST" and request.url.path == "/upload":
+        ip = request.client.host if request.client else "unknown"
+        now = time.time()
+
+        # Clean history for this IP
+        request_history[ip] = [
+            t for t in request_history[ip] if now - t < RATE_LIMIT_WINDOW
+        ]
+
+        if len(request_history[ip]) >= MAX_REQUESTS_PER_IP:
+            raise HTTPException(
+                status_code=429,
+                detail="Too many upload requests. Please try again in a minute.",
+            )
+
+        request_history[ip].append(now)
+
+    return await call_next(request)
+
+
+# 2. File Upload Size Limit Middleware (Max 10MB)
+@app.middleware("http")
+async def limit_upload_size(request: Request, call_next):
+    if request.method == "POST" and request.url.path == "/upload":
+        content_length = request.headers.get("content-length")
+        if content_length and int(content_length) > 10 * 1024 * 1024:  # 10MB
+            raise HTTPException(
+                status_code=413,
+                detail="File upload exceeds maximum allowed limit of 10MB.",
+            )
+    return await call_next(request)
+
 
 session_service = InMemorySessionService()
 artifact_service = InMemoryArtifactService()
